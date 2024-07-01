@@ -1,8 +1,10 @@
 package com.project.weatherwear.member.service;
 
 import com.project.weatherwear.member.domain.User;
+import com.project.weatherwear.member.dto.RequestEmailCheckDTO;
 import com.project.weatherwear.member.dto.RequestRegisterUserDTO;
 import com.project.weatherwear.member.dto.ResponseCommonDTO;
+import com.project.weatherwear.member.dto.ResponseEmailCheckDTO;
 import com.project.weatherwear.member.mapper.UserMapper;
 import com.project.weatherwear.member.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +33,15 @@ public class AuthService {
         userRepository.save(user);
 
         return new ResponseCommonDTO(true, "User registered successfully.");
+
+    }
+
+    public ResponseEmailCheckDTO checkDuplicateEmail(String email){
+
+        boolean isAvailable = !userRepository.findByEmail(email);
+        String message = isAvailable ? "This email is available." : "This email is unavailable.";
+
+        return new ResponseEmailCheckDTO(isAvailable, message);
 
     }
 }
