@@ -1,13 +1,13 @@
-package com.project.weatherwear.member.dto;
+package com.project.weatherwear.user.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public class ResponseCommonDTO {
+public class ResponseDuplicateCheckDTO {
 
-    private final boolean success;
+    private final boolean isAvailable;
     private final String message;
 
 }

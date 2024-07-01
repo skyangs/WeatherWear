@@ -1,4 +1,4 @@
-package com.project.weatherwear.member.dto;
+package com.project.weatherwear.user.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

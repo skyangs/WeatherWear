@@ -1,13 +1,13 @@
-package com.project.weatherwear.member.dto;
+package com.project.weatherwear.user.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public class ResponseEmailCheckDTO {
+public class ResponseCommonDTO {
 
-    private final boolean isAvailable;
+    private final boolean success;
     private final String message;
 
 }

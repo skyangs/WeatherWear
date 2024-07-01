@@ -1,7 +1,7 @@
-package com.project.weatherwear.member.mapper;
+package com.project.weatherwear.user.mapper;
 
-import com.project.weatherwear.member.domain.User;
-import com.project.weatherwear.member.dto.RequestRegisterUserDTO;
+import com.project.weatherwear.user.domain.User;
+import com.project.weatherwear.user.dto.RequestRegisterUserDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

@@ -1,12 +1,11 @@
-package com.project.weatherwear.member.service;
+package com.project.weatherwear.user.service;
 
-import com.project.weatherwear.member.domain.User;
-import com.project.weatherwear.member.dto.RequestEmailCheckDTO;
-import com.project.weatherwear.member.dto.RequestRegisterUserDTO;
-import com.project.weatherwear.member.dto.ResponseCommonDTO;
-import com.project.weatherwear.member.dto.ResponseEmailCheckDTO;
-import com.project.weatherwear.member.mapper.UserMapper;
-import com.project.weatherwear.member.repository.UserRepository;
+import com.project.weatherwear.user.domain.User;
+import com.project.weatherwear.user.dto.RequestRegisterUserDTO;
+import com.project.weatherwear.user.dto.ResponseCommonDTO;
+import com.project.weatherwear.user.dto.ResponseDuplicateCheckDTO;
+import com.project.weatherwear.user.mapper.UserMapper;
+import com.project.weatherwear.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,12 +35,21 @@ public class AuthService {
 
     }
 
-    public ResponseEmailCheckDTO checkDuplicateEmail(String email){
+    public ResponseDuplicateCheckDTO checkDuplicateEmail(String email){
 
         boolean isAvailable = !userRepository.findByEmail(email);
         String message = isAvailable ? "This email is available." : "This email is unavailable.";
 
-        return new ResponseEmailCheckDTO(isAvailable, message);
+        return new ResponseDuplicateCheckDTO(isAvailable, message);
+
+    }
+
+    public ResponseDuplicateCheckDTO checkDuplicateNickname(String nickname){
+
+        boolean isAvailable = !userRepository.findByNickname(nickname);
+        String message = isAvailable ? "This nickname is available." : "This nickname is unavailable.";
+
+        return new ResponseDuplicateCheckDTO(isAvailable, message);
 
     }
 }

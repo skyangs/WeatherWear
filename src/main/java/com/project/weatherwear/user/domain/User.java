@@ -1,7 +1,7 @@
-package com.project.weatherwear.member.domain;
+package com.project.weatherwear.user.domain;
 
 import com.project.weatherwear.common.BaseTimeEntity;
-import com.project.weatherwear.member.exception.UserException;
+import com.project.weatherwear.user.exception.UserException;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 

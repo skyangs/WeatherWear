@@ -1,4 +1,4 @@
-package com.project.weatherwear.member.exception;
+package com.project.weatherwear.user.exception;
 
 import lombok.Getter;
 
