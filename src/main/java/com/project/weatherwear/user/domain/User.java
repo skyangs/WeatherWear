@@ -1,13 +1,15 @@
 package com.project.weatherwear.user.domain;
 
 import com.project.weatherwear.common.BaseTimeEntity;
-import com.project.weatherwear.user.exception.UserException;
+import com.project.weatherwear.common.exception.ErrorCode;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 @NoArgsConstructor
+@Getter
 @Entity
 public class User extends BaseTimeEntity implements Serializable {
 
@@ -38,7 +40,7 @@ public class User extends BaseTimeEntity implements Serializable {
     @Transient
     public static final String PASSWORD_REG = "^(?=.*[A-Za-z])(?=.*\\d|.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,10}$|^(?=.*[!@#$%^&*])(?=.*\\d)[A-Za-z\\d!@#$%^&*]{8,10}$\n";
     @Transient
-    public static final String NICKNAME_REG = "^[A-Za-z0-9]{1,7}$\n";
+    public static final String NICKNAME_REG = "^[가-힣a-zA-Z]{1,10}$";
 
 
     public User(String email, String password, String name, String nickname, boolean isSocial, String role){
@@ -65,43 +67,43 @@ public class User extends BaseTimeEntity implements Serializable {
 
     public void isEmailNull(String email){
         if(email == null){
-            throw new IllegalArgumentException(UserException.EMAIL_IS_NULL_EXCEPTION.getMessage());
+            throw new IllegalArgumentException(ErrorCode.EMAIL_IS_NULL_EXCEPTION.getMessage());
         }
     }
 
     public void checkEmailRegex(String email){
         if(!email.matches(EMAIL_REG)){
-            throw new IllegalArgumentException(UserException.EMAIL_INVALID_EXCEPTION.getMessage());
+            throw new IllegalArgumentException(ErrorCode.EMAIL_INVALID_EXCEPTION.getMessage());
         }
     }
 
     public void isPasswordNull(String password){
         if(password == null){
-            throw new IllegalArgumentException(UserException.PASSWORD_IS_NULL_EXCEPTION.getMessage());
+            throw new IllegalArgumentException(ErrorCode.PASSWORD_IS_NULL_EXCEPTION.getMessage());
         }
     }
 
     public void checkPasswordRegex(String password){
         if(!password.matches(PASSWORD_REG)){
-            throw new IllegalArgumentException(UserException.PASSWORD_INVALID_EXCEPTION.getMessage());
+            throw new IllegalArgumentException(ErrorCode.PASSWORD_INVALID_EXCEPTION.getMessage());
         }
     }
 
     public void isNameNull(String name){
         if(name == null){
-            throw new IllegalArgumentException(UserException.NAME_IS_NULL_EXCEPTION.getMessage());
+            throw new IllegalArgumentException(ErrorCode.NAME_IS_NULL_EXCEPTION.getMessage());
         }
     }
 
     public void isNickNameNull(String nickname){
         if(nickname == null){
-            throw new IllegalArgumentException(UserException.NICKNAME_IS_NULL_EXCEPTION.getMessage());
+            throw new IllegalArgumentException(ErrorCode.NICKNAME_IS_NULL_EXCEPTION.getMessage());
         }
     }
 
     public void checkNickNameRegex(String nickname){
         if(!nickname.matches(NICKNAME_REG)){
-            throw new IllegalArgumentException(UserException.NICKNAME_INVALID_EXCEPTION.getMessage());
+            throw new IllegalArgumentException(ErrorCode.NICKNAME_INVALID_EXCEPTION.getMessage());
         }
     }
 

@@ -1,9 +1,6 @@
 package com.project.weatherwear.user.controller;
 
-import com.project.weatherwear.user.dto.RequestEmailCheckDTO;
-import com.project.weatherwear.user.dto.RequestRegisterUserDTO;
-import com.project.weatherwear.user.dto.ResponseCommonDTO;
-import com.project.weatherwear.user.dto.ResponseDuplicateCheckDTO;
+import com.project.weatherwear.user.dto.*;
 import com.project.weatherwear.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +30,17 @@ public class UserController {
     public ResponseEntity<ResponseDuplicateCheckDTO> checkDuplicateNickname(@PathVariable("nickname") String nickname){
         return ResponseEntity.ok(userService.checkDuplicateNickname(nickname));
     }
+
+    @PostMapping("/email")
+    public ResponseEntity<ResponseFindEmailDTO> findEmail(@Validated @RequestBody RequestFindEmailDTO findEmailDTO){
+        return ResponseEntity.ok(userService.findEmail(findEmailDTO.getName(), findEmailDTO.getNickname()));
+    }
+
+    @PostMapping("/password")
+    public ResponseEntity<ResponseCommonDTO> findPassword(@Validated @RequestBody RequestFindPWDTO findPWDTO){
+        return ResponseEntity.ok(userService.findPassword(findPWDTO.getEmail(), findPWDTO.getName(), findPWDTO.getNickname()));
+    }
+
 
 
 }
