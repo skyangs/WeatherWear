@@ -1,7 +1,7 @@
 package com.project.weatherwear.security.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.weatherwear.jwt.JWTUtil;
+import com.project.weatherwear.security.util.JWTUtil;
 import com.project.weatherwear.security.service.CustomUserDetailsService;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.InvalidClaimException;

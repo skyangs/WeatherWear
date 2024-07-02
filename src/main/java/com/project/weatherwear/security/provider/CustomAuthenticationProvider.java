@@ -25,7 +25,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
         UserDTO userDTO = (UserDTO) userDetailsService.loadUserByUsername(username);
 
-        if(!passwordEncoder.matches(password, userDTO.getPassword())){
+         if(!passwordEncoder.matches(password, userDTO.getPassword())){
             // 인증 실패 시 AuthenticationException 발생
             throw new BadCredentialsException("Authentication failed for " + username);
         }

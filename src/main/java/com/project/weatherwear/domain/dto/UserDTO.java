@@ -19,11 +19,11 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO implements UserDetails{
-    private String userId;
+    private long userId;
     private String username;
     private String nickname;
     private String password;
-    private String isSocial;
+    private boolean isSocial;
     private Collection<? extends GrantedAuthority> authorities;
 
     @Override

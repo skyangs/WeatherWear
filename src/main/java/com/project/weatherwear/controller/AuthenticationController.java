@@ -2,12 +2,12 @@ package com.project.weatherwear.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.weatherwear.domain.dto.UserDTO;
-import com.project.weatherwear.domain.entity.UserEntity;
 import com.project.weatherwear.domain.oauth2.kakao.KakaoOAuthToken;
 import com.project.weatherwear.domain.oauth2.kakao.KakaoProfile;
-import com.project.weatherwear.jwt.JWTUtil;
+import com.project.weatherwear.security.util.JWTUtil;
 import com.project.weatherwear.security.service.CustomUserDetailsService;
 import com.project.weatherwear.service.UserService;
+import com.project.weatherwear.domain.entity.User;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -101,7 +101,7 @@ public class AuthenticationController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Profile not provided by Kakao");
             }
 
-            Optional<UserEntity> existUser = userService.findByUsername(username);// 사용자 정보 저장 또는 생성
+            Optional<User> existUser = userService.findByUsername(username);// 사용자 정보 저장 또는 생성
 
             ObjectMapper objectMapper = new ObjectMapper();
             if (existUser.isEmpty()) {//기존에 카카오로 회원가입한 사용자가 아니라면 추가 정보 입력하는 페이지로 이동함

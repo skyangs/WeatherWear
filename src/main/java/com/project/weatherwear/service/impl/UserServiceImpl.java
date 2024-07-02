@@ -1,10 +1,11 @@
 package com.project.weatherwear.service.impl;
 
-import com.project.weatherwear.domain.entity.UserEntity;
 import com.project.weatherwear.repository.UserRepository;
 import com.project.weatherwear.service.UserService;
+import com.project.weatherwear.domain.entity.User;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,8 +15,33 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
-    public Optional<UserEntity> findByUsername(String username) {
+    public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public void updateUser(String username, String newNickname, String newName){
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        user.updateUserDetails(newNickname, newName);
+
+        userRepository.save(user);
+    }
+
+    @Override
+    public void changePassword(String username, String newPassword) {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        user.changePassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+    }
+
+    @Override
+    public void changeNickname(String username, String nickname) {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        user.changeNickname(nickname);
+        userRepository.save(user);
     }
 }

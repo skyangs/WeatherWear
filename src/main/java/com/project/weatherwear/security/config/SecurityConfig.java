@@ -1,8 +1,8 @@
 package com.project.weatherwear.security.config;
 
-import com.project.weatherwear.handler.LoginFailureHandler;
-import com.project.weatherwear.handler.LoginSuccessHandler;
-import com.project.weatherwear.jwt.JWTUtil;
+import com.project.weatherwear.security.handler.LoginFailureHandler;
+import com.project.weatherwear.security.handler.LoginSuccessHandler;
+import com.project.weatherwear.security.util.JWTUtil;
 import com.project.weatherwear.security.filter.JwtCheckFilter;
 import com.project.weatherwear.security.provider.CustomAuthenticationProvider;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +29,8 @@ public class SecurityConfig {
 
 
     private final JwtCheckFilter jwtCheckFilter;
+
+
 
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {

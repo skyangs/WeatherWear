@@ -1,4 +1,4 @@
-package com.project.weatherwear.jwt;
+package com.project.weatherwear.security.util;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

@@ -1,9 +1,9 @@
-package com.project.weatherwear.handler;
+package com.project.weatherwear.security.handler;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.weatherwear.domain.dto.UserDTO;
-import com.project.weatherwear.jwt.JWTUtil;
+import com.project.weatherwear.security.util.JWTUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,11 +12,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.Map;
 
 @Log4j2
@@ -45,7 +44,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         String jsonString = objectMapper.writeValueAsString(claims);
 
 
-        Cookie cookie = new Cookie("auth_token", jsonString);
+        String encodedValue = URLEncoder.encode( jsonString, "UTF-8" ) ;
+        Cookie cookie = new Cookie("auth_token", encodedValue);
         cookie.setHttpOnly(true);
 //        cookie.setSecure(true); // HTTPS 환경에서만 사용
         cookie.setPath("/");

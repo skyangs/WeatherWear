@@ -1,7 +1,7 @@
 package com.project.weatherwear.controller;
 
 
-import com.project.weatherwear.jwt.JWTUtil;
+import com.project.weatherwear.security.util.JWTUtil;
 import com.project.weatherwear.security.service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

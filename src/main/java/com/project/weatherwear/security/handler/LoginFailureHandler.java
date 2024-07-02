@@ -1,4 +1,4 @@
-package com.project.weatherwear.handler;
+package com.project.weatherwear.security.handler;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

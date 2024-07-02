@@ -2,7 +2,7 @@ package com.project.weatherwear.security.service;
 
 import com.project.weatherwear.repository.UserRepository;
 import com.project.weatherwear.domain.dto.UserDTO;
-import com.project.weatherwear.domain.entity.UserEntity;
+import com.project.weatherwear.domain.entity.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -11,7 +11,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,15 +29,20 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Optional<UserEntity> user = userRepository.findByUsername(username);
-        if (user.isEmpty()) {
+        Optional<User> result = userRepository.findByUsername(username);
+        if (result.isEmpty()) {
             throw new UsernameNotFoundException("No user found with username: " + username);
         }
-        List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(user.get().getRole()));
-        ModelMapper mapper = new ModelMapper();
-        UserDTO userDTO = mapper.map(user, UserDTO.class);
-        userDTO.setAuthorities(authorities);
+        User user = result.get();
+        List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(user.getRole()));
 
-        return userDTO;
+        return UserDTO.builder()
+                .userId(user.getUserId())
+                .username(user.getUsername())
+                .nickname(user.getNickname())
+                .password(user.getPassword())
+                .isSocial(user.isSocial())
+                .authorities(authorities)
+                .build();
     }
 }
