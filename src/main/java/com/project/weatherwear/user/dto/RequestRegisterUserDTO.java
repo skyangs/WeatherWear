@@ -23,9 +23,6 @@ public class RequestRegisterUserDTO {
     @NotBlank(message = "닉네임은 필수입니다.")
     private final String nickname;
 
-    @AssertTrue(message = "필수 약관에 항상 동의해야합니다")
-    private final boolean agreeToTerms;
-
     private final boolean isSocial;
 
 }
